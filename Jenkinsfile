@@ -6,7 +6,8 @@ pipeline{
             steps{
                 script{
                     withSonarQubeEnv(credentialsId: 'my_sonar_token') {
-                     sh '${mvnHome}/bin/mvn sonar:sonar'
+                        sh '${mvnHome/bin/mvn package}'
+                        sh '${mvnHome}/bin/mvn sonar:sonar'
                 }
                 
             }
