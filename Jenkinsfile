@@ -11,9 +11,10 @@ pipeline{
             steps{
                 script{
                     withSonarQubeEnv(credentialsId: 'my_sonar_token') {
-                   sh "mvn sonar:sonar"        
+                   sh "mvn sonar:sonar" 
+                   sh "mvn clean install"       
                 }
-                sh "mvn clean install"
+                
             }
 
         }
