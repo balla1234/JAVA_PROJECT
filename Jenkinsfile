@@ -1,9 +1,9 @@
 pipeline{
-    agent {
+    agent any
         tools{
             maven 'mymaven'
         }
-    }
+    
     stages{
         stage("SonarQube_check_quality"){
             
