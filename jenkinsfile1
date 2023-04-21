@@ -6,6 +6,7 @@ pipeline{
                 }
             }
             stages{ 
+                
                 stage('Quality gate status check')
                   steps{
                       script{
