@@ -13,11 +13,7 @@ pipeline{
                       withSonarQubeEnv(credentialsId: 'my_sonar_token') { 
                       sh "mvn sonar:sonar"
                        }
-                      timeout(time: 1, unit: 'HOURS') {
-                      
-                      
-                    }
-		    sh "mvn clean install"
+                
                   }
                 }  
               }
