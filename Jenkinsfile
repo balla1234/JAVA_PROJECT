@@ -11,24 +11,22 @@ pipeline{
             steps{
                 script{
                     withSonarQubeEnv(credentialsId: 'my_sonar_token') {
-                    sh "mvn sonar:sonar" 
+                   bat 'mvn clean package sonar:sonar
+   	               echo 'Static Analysis Completed' 
 
                     }
                    
                     
-stage("Check Quality Gate") {
-    timeout(time: 1, unit: 'HOURS') {
-        def qg = waitForQualityGate()
-        waitUntil {
-            // Sometimes an analysis will get the status PENDING meaning it still needs to be analysed.
-            if (qg.status == 'PENDING') {
-                qg = waitForQualityGate()
-                return false
-            } else {
-                return true
-            }
-          }
-                
+ stage("Quality Gate"){
+      timeout(time: 1, unit: 'HOURS') 
+      {
+        waitForQualityGate abortPipeline: true
+        def qg= waitForQualityGate()
+        if (qg.status!= 'OK'){
+          error "Pipeline aborted due to quality gate failure: ${qg.status}"
+        }
+      }         
+      echo 'Quality Gate Passed'    
              }
                 }
                           
