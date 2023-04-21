@@ -11,7 +11,7 @@ pipeline{
             steps{
                 script{
                     withSonarQubeEnv(credentialsId: 'my_sonar_token') {
-                   bat 'mvn clean package sonar:sonar
+                   bat 'mvn  sonar:sonar'
    	               echo 'Static Analysis Completed' 
 
                     }
