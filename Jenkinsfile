@@ -11,8 +11,7 @@ pipeline{
             steps{
                 script{
                     withSonarQubeEnv(credentialsId: 'my_sonar_token') {
-                   withMaven(maven:'Maven 3.5') {
-                        sh 'mvn clean package sonar:sonar'
+                    sh 'mvn sonar:sonar'
 
                     }
                    
@@ -26,7 +25,7 @@ pipeline{
           error "Pipeline aborted due to quality gate failure: ${qg.status}"
         }
       }         
-      echo 'Quality Gate Passed'    
+      sh 'mvn clean package'    
              }
                 }
                           
@@ -34,6 +33,7 @@ pipeline{
                 
             }
     }
+
 
     } 
   
