@@ -10,20 +10,21 @@ pipeline{
             
             steps{
                 script{
-                    withSonarQubeEnv(credentialsId: 'my_sonar_token') {
-                    bat 'mvn package sonar:sonar'
+                    withSonarQubeEnv('my_sonar_token') {
+                    sh 'mvn sonar:sonar'
 
                     }
                    
                     
  stage("Quality Gate"){
       timeout(time: 1, unit: 'HOURS') 
-      {
-        waitForQualityGate abortPipeline: true
-        
-          }
-      }         
-      sh 'mvn clean package'    
+      def qg = waitForQualityGate()
+                      if (qg.status != 'OK') {
+                           error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                      }
+                    }
+		    sh "mvn clean install"        
+         
              }
                 }
                           
