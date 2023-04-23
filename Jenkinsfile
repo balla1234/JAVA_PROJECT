@@ -5,22 +5,23 @@
         }
     
     stages{
-        stage("SonarQube_check_quality"){
+        stage("Sonar quality status"){
             
             steps{
                 script{
-                    withSonarQubeEnv(credentialsId: 'my_sonar_token') {
-                    sh "mvn sonar:sonar" 
+                    withSonarQubeEnv(credentialsId: 'sonar_token') {
+                    sh 'mvn clean package sonar:sonar'
+                     }
 
                     }
                    
-             }
+                  }
                 }
                           
-                }
+             }
                 
-            }
-    }
+        }
+    
         
 
 
