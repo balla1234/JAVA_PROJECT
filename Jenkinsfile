@@ -7,12 +7,18 @@
     stages{
         stage("Sonar quality status"){
             
-            steps{
-                script{
-                    withSonarQubeEnv(credentialsId: 'sonar_token') {
+         steps{
+            script{
+                withSonarQubeEnv(credentialsId: 'sonar_token') {
                     sh "mvn sonar:sonar"    
-                    sh 'mvn clean package sonar:sonar'
+                    
                      }
+                timeout(time: 1, unit: 'HOURS') {
+                    def qg = waitForQualityGate()
+                      if (qg.status != 'OK') {
+                           error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                      }
+                    }      
 
                     }
                    
