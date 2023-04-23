@@ -8,19 +8,11 @@
                 steps{
                     script{
                          withSonarQubeEnv(credentialsId: 'my_sonar_token') {
-                            sh 'mvn sonar:sonar'
+                            sh 'mvn clean package sonar:sonar'
                     }
                   }
                 }
-             }
-
-            stage('Quality Gate status'){
-                steps{
-                    script{
-                        waitForQualityGate abortPipeline: false, credentialsId: 'my_sonar_token'
-                    }
-                }
-            }  
+            } 
             
         }
                 
