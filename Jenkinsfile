@@ -1,17 +1,15 @@
  pipeline{
-    agent any
-        tools{
-            maven 'mymaven'
+    agent{
+        docker{
+            image 'maven'
         }
-    
+    }
     stages{
-        stage("Sonar quality status"){
-            
-         steps{
-            script{
-                
-                withSonarQubeEnv(credentialsId: 'my_sonar_token') {
-                     sh 'mvn clean package sonar:sonar'
+            stage("Sonar quality status"){
+                steps{
+                    script{
+                         withSonarQubeEnv(credentialsId: 'my_sonar_token') {
+                            sh 'mvn clean package sonar:sonar'
                     }
                   }
                 }
@@ -23,8 +21,9 @@
                         waitForQualityGate abortPipeline: false, credentialsId: 'my_sonar_token'
                     }
                 }
-            }           
-             }
+            }  
+            
+        }
                 
         }
     
