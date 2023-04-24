@@ -9,7 +9,7 @@ pipeline {
             }
             steps{
                 script{
-                    withSonarQubeEnv(credentialsId: 'my_sonar_token') {
+                    withSonarQubeEnv(credentialsId: 'sonar-token') {
                            sh 'mvn sonar:sonar'
                             
                         }
