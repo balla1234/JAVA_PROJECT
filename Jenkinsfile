@@ -1,5 +1,3 @@
- 
-
 pipeline{
     agent any
         tools{
@@ -11,7 +9,7 @@ pipeline{
             
             steps{
                 script{
-                    withSonarQubeEnv(credentialsId: 'sonar-token') {
+                    withSonarQubeEnv(credentialsId: 'mysonartoken') {
                       sh 'mvn sonar:sonar'
                    }
                    
