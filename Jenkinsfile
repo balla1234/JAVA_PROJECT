@@ -20,7 +20,12 @@ pipeline{
                     sh "mvn clean install"
                   }
                }
-             }      
+             }  
+             stage("jfrog"){
+                steps{
+                    archiveArtifacts artifacts: 'target/mahaLogin-5.0.war', followSymlinks: false
+                }
+             }
 
             }
          }
