@@ -14,7 +14,7 @@ pipeline{
                    }
                    
                     timeout(time: 1, unit: 'HOURS') {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'mysonartoken'
+                    waitForQualityGate abortPipeline: true, credentialsId: 'mysonartoken'
                       
                     }
                   }
@@ -22,7 +22,7 @@ pipeline{
              }      
 
             }
-         
+         }
     
 
 
