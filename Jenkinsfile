@@ -12,10 +12,6 @@ pipeline{
                     withSonarQubeEnv(credentialsId: 'mysonartoken') {
                       sh 'mvn sonar:sonar'
                    }
-                   
-                    
-                    waitForQualityGate abortPipeline: false, credentialsId: 'mysonartoken'
-                      
                     
                   }
                }
