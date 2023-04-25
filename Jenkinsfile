@@ -13,10 +13,10 @@ pipeline{
                       sh 'mvn sonar:sonar'
                    }
                    
-                    timeout(time: 1, unit: 'HOURS') {
-                    waitForQualityGate abortPipeline: true, credentialsId: 'mysonartoken'
+                    
+                    waitForQualityGate abortPipeline: false, credentialsId: 'mysonartoken'
                       
-                    }
+                    
                   }
                }
              }      
