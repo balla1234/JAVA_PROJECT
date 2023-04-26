@@ -27,12 +27,6 @@ pipeline{
                 }
              }
 
-             stage("docker build"){
-                steps{
-                   sh "docker build -t shivani999/cicdproject26April:1 ."
-                }
-             }
-
             }
          }
     
